@@ -1,0 +1,10 @@
+C:\DNN\bin\ShirtDesigner.dll.config
+C:\DNN\bin\ShirtDesigner.dll
+C:\DNN\bin\ShirtDesigner.pdb
+C:\DNN\DesktopModules\MVC\shirtdesigner\ShirtDesigner\obj\Debug\ShirtDesigner.csproj.AssemblyReference.cache
+C:\DNN\DesktopModules\MVC\shirtdesigner\ShirtDesigner\obj\Debug\bakaJzspiG.ShirtDesigner.ShirtDesigner.App_LocalResources.Settings.resources
+C:\DNN\DesktopModules\MVC\shirtdesigner\ShirtDesigner\obj\Debug\ShirtDesigner.csproj.GenerateResource.cache
+C:\DNN\DesktopModules\MVC\shirtdesigner\ShirtDesigner\obj\Debug\ShirtDesigner.csproj.CoreCompileInputs.cache
+C:\DNN\DesktopModules\MVC\shirtdesigner\ShirtDesigner\obj\Debug\ShirtDesigner.csproj.CopyComplete
+C:\DNN\DesktopModules\MVC\shirtdesigner\ShirtDesigner\obj\Debug\ShirtDesigner.dll
+C:\DNN\DesktopModules\MVC\shirtdesigner\ShirtDesigner\obj\Debug\ShirtDesigner.pdb

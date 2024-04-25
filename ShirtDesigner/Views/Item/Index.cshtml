@@ -1,0 +1,31 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable< bakaJzspiG.ShirtDesigner.ShirtDesigner.Models.Item >>
+
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+
+<div id="Items-@Dnn.ModuleContext.ModuleId">
+    <div class="container">
+        <div class="buttons">
+            <div id="text-btn-container">
+                <label for="text-btn" id="text-label">
+                    <img src="text.png" alt="text" height="64" width="64">
+                    <span>Szöveg hozzáadása</span>
+                </label>
+            </div>
+
+            <div id="upload-btn-container">
+                <label for="upload-btn" id="upload-label">
+                    <img src="upload.png" alt="upload" height="64" width="64">
+                    <span>Kép feltöltése</span>
+                </label>
+                <input type="file" id="upload-btn" accept="image/*">
+            </div>
+        </div>
+
+
+        <div id="canvas-container">
+            <canvas id="my-canvas" width="260" height="400"></canvas>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿/************************************************************/
+/*****              SqlDataProvider                     *****/
+/*****                                                  *****/
+/*****                                                  *****/
+/***** Note: To manually execute this script you must   *****/
+/*****       perform a search and replace operation     *****/
+/*****       for {databaseOwner} and {objectQualifier}  *****/
+/*****                                                  *****/
+/************************************************************/
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}DesignableProduct]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}DesignableProduct]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}UsableGraphics]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}UsableGraphics]
+GO
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}ProductOrder]') AND type in (N'U'))
+DROP TABLE {databaseOwner}[{objectQualifier}ProductOrder]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}DesignableProduct
+    (
+    [ItemId] int NOT NULL IDENTITY (1, 1),
+        CONSTRAINT [Pk_DesignableProduct] PRIMARY KEY CLUSTERED
+    [ItemName] nvarchar(MAX) NOT NULL,
+    [ItemDescription] nvarchar(MAX) NOT NULL,
+    [ItemSize] nvarchar(MAX) NULL,
+    [ItemPrice] int NOT NULL,
+    [ItemPic] nvarchar(MAX) NOT NULL
+    )  ON [PRIMARY]
+     TEXTIMAGE_ON [PRIMARY]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}UsableGraphics
+    (
+    [GraphicId] int NOT NULL IDENTITY (1, 1),
+        CONSTRAINT [Pk_UsableGraphics] PRIMARY KEY CLUSTERED
+    [GraphicPic] nvarchar(MAX) NOT NULL
+    )  ON [PRIMARY]
+     TEXTIMAGE_ON [PRIMARY]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}ProductOrder
+    (
+    [OrderId] int NOT NULL IDENTITY (1, 1),
+        CONSTRAINT [Pk_ProductOrder] PRIMARY KEY CLUSTERED
+    [ItemId] int NOT NULL,
+    [Email] nvarchar(MAX) NULL,
+    )  ON [PRIMARY]
+     TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}ProductOrder WITH NOCHECK ADD CONSTRAINT [FK_DesignableProduct_ProductOrder] FOREIGN KEY ([ItemId])
+    REFERENCES {databaseOwner}{objectQualifier}DesignableProduct ([ItemId])
+    ON DELETE CASCADE
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}CustomDesign
+    (
+    [DesignId] int NOT NULL IDENTITY (1, 1),
+        CONSTRAINT [Pk_CustomDesign] PRIMARY KEY CLUSTERED
+    [OrderId] int NOT NULL IDENTITY 
+    [DesignImg] nvarchar(MAX) NULL,
+    )  ON [PRIMARY]
+     TEXTIMAGE_ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}CustomDesign WITH NOCHECK ADD CONSTRAINT [FK_ProductOrder_CustomDesign] FOREIGN KEY ([OrderId])
+    REFERENCES {databaseOwner}{objectQualifier}ProductOrder ([OrderId])
+    ON DELETE CASCADE
+GO
+
+/************************************************************/
+/*****              SqlDataProvider                     *****/
+/************************************************************/

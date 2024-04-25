@@ -1,0 +1,163 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable< bakaJzspiG.ShirtDesigner.ShirtDesigner.Models.Item >>
+
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+
+<div id="Items-@Dnn.ModuleContext.ModuleId">
+    <div class="buttons">
+        <div id="text-btn-container">
+            <label for="text-btn" id="text-label">
+                <img src="C:/DNN/DesktopModules/MVC/shirtdesigner/TestImages/text.png" alt="text" height="64" width="64">
+                <span>Szöveg hozzáadása</span>
+            </label>
+        </div>
+
+        <div id="upload-btn-container">
+            <label for="upload-btn" id="upload-label">
+                <img src="C:/DNN/DesktopModules/MVC/shirtdesigner/TestImages/upload.png" alt="upload" height="64" width="64">
+                <span>Kép feltöltése</span>
+            </label>
+            <input type="file" id="upload-btn" accept="image/*">
+        </div>
+    </div>
+
+
+    <div id="canvas-container">
+        <canvas id="my-canvas" width="260" height="400"></canvas>
+    </div>
+    <script>
+        const canvas = document.getElementById('my-canvas');
+let img = null;
+const ctx = canvas.getContext('2d');
+let offsetX = 0;
+let offsetY = 0;
+let scaledWidth = 0;
+let scaledHeight = 0;
+
+const resetCanvas = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    ctx.drawImage(img, offsetX, offsetY, scaledWidth, scaledHeight);
+}
+// Event listener for image upload button
+document.getElementById('upload-btn').addEventListener('change', function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            img = new Image();
+            img.onload = function() {
+                scaleImageToFitCanvas();
+            };
+            img.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+// Function to scale the image to fit the canvas
+function scaleImageToFitCanvas() {
+    const aspectRatio = img.width / img.height;
+    scaledWidth = canvas.width;
+    scaledHeight = canvas.width / aspectRatio;
+    if (scaledHeight > canvas.height) {
+        scaledHeight = canvas.height;
+        scaledWidth = canvas.height * aspectRatio;
+    }
+    offsetX = (canvas.width - scaledWidth) / 2; // Center image horizontally
+    offsetY = (canvas.height - scaledHeight) / 2; // Center image vertically
+    resetCanvas();
+}
+
+let draggable = false;
+
+canvas.onmousedown = (e) => {
+    const clickX = e.layerX;
+    const clickY = e.layerY;
+    // Calculate middle position of the image
+    const imageMiddleX = offsetX + scaledWidth / 2;
+    const imageMiddleY = offsetY + scaledHeight / 2;
+    // Check if the click occurred within the boundaries of the image
+    if (clickX >= offsetX && clickX <= offsetX + scaledWidth && clickY >= offsetY && clickY <= offsetY + scaledHeight) {
+        // Calculate offset from the middle of the image
+        offsetX += clickX - imageMiddleX;
+        offsetY += clickY - imageMiddleY;
+        resetCanvas();
+        draggable = true;
+    }
+    
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Delete') {
+            img = null;
+            resetCanvas();
+        }
+    });
+}
+
+canvas.onmousemove = (e) => {
+    if (draggable) {
+        offsetX += e.movementX;
+        offsetY += e.movementY;
+        resetCanvas();
+    }
+}
+canvas.onmouseup = (e) => {
+    draggable = false;
+}
+canvas.onmouseout = (e) => {
+    draggable = false;
+}
+
+//Szöveg hozzáadása
+document.getElementById('text-btn-container').addEventListener('click', function() {
+    // Create a new textbox element
+    var textbox = document.createElement('input');
+    textbox.type = 'text';
+    textbox.placeholder = 'Szöveg hozzáadása';
+    textbox.classList.add('textbox'); // Add the 'textbox' class to apply styles
+    textbox.style.position = 'absolute'; // Set position absolute for positioning
+    textbox.style.left = '50%'; // Position horizontally centered
+    textbox.style.top = '50%'; // Position vertically centered
+    textbox.style.transform = 'translate(-50%, -50%)'; // Center the textbox
+    textbox.addEventListener('focus', function() {
+        this.placeholder = '';
+    });
+    document.getElementById('canvas-container').appendChild(textbox);
+
+    // Mouse down event listener
+    textbox.addEventListener('mousedown', function(e) {
+        // Calculate the offset between mouse position and the middle of the textbox
+        var offsetTxtX = e.clientX - (textbox.getBoundingClientRect().left + textbox.offsetWidth / 2);
+        var offsetTxtY = e.clientY - (textbox.getBoundingClientRect().top + textbox.offsetHeight / 2);
+
+        // Function to update the position of the textbox based on mouse movement
+        function moveTextbox(e) {
+            var newX = e.lX - offsetTxtX;
+            var newY = e.layerY - offsetTxtY;
+            textbox.style.left = newX + 'px';
+            textbox.style.top = newY + 'px';
+        }
+
+        // Attach mousemove event listener to the document
+        document.addEventListener('mousemove', moveTextbox);
+
+        // Detach mousemove event listener and clean up when mouse button is released
+        document.addEventListener('mouseup', function mouseupHandler() {
+            document.removeEventListener('mousemove', moveTextbox);
+            document.removeEventListener('mouseup', mouseupHandler);
+        });
+
+        window.addEventListener('keydown', function deleteTextbox(e) {
+            if (e.key === 'Delete') {
+                // Remove the textbox element from the canvas
+                document.getElementById('canvas-container').removeChild(textbox);
+                // Remove the keydown event listener
+                window.removeEventListener('keydown', deleteTextbox);
+            }
+        });
+    });
+
+
+});
+
+    </script>
+</div>
