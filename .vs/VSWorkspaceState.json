@@ -2,8 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\ShirtDesigner",
-    "\\ShirtDesigner\\Views\\Item"
+    "\\ShirtDesigner\\Models"
   ],
-  "SelectedNode": "\\module.css",
+  "SelectedNode": "\\ShirtDesigner\\Models\\DesignableProduct.cs",
   "PreviewInSolutionExplorer": false
 }
