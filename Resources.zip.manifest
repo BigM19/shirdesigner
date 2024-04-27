@@ -9,6 +9,10 @@
       <name>Settings.cshtml</name>
     </file>
     <file>
+      <path>Views/ProductGrid/</path>
+      <name>Index.cshtml</name>
+    </file>
+    <file>
       <path>Views/Item/</path>
       <name>Edit.cshtml</name>
     </file>
@@ -17,12 +21,12 @@
       <name>Index.cshtml</name>
     </file>
     <file>
-      <path>obj/Debug/</path>
-      <name>.NETFramework,Version=v4.7.2.AssemblyAttributes.cs</name>
+      <path>Documentation/</path>
+      <name>Documentation.css</name>
     </file>
     <file>
-      <path>obj/Debug/</path>
-      <name>ShirtDesigner.csproj.AssemblyReference.cache</name>
+      <path>Documentation/</path>
+      <name>Documentation.html</name>
     </file>
     <file>
       <path>Views/</path>
@@ -35,14 +39,6 @@
     <file>
       <path>App_LocalResources/</path>
       <name>Settings.resx</name>
-    </file>
-    <file>
-      <path>Documentation/</path>
-      <name>Documentation.css</name>
-    </file>
-    <file>
-      <path>Documentation/</path>
-      <name>Documentation.html</name>
     </file>
     <file>
       <path />

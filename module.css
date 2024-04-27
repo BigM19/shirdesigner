@@ -1,10 +1,10 @@
-body {
+.content {
     margin: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("C:/DNN/DesktopModules/MVC/shirtdesigner/TestImages/POLO_32"); 
+    background-image: url("C:\DNN\DesktopModules\MVC\shirtdesigner\TestImages\POLO_32"); 
     background-repeat: no-repeat;
     background-position: center;
     background-size: 500px auto;
@@ -58,7 +58,7 @@ body {
         text-align: center;
     }
 
-/* Hide the file inputs */
+\* Hide the file inputs *\
 #text-btn, #upload-btn {
     display: none;
 }
@@ -77,8 +77,8 @@ body {
 }
 
     .textbox:focus {
-        outline: none; /* Remove outline */
-        border-color: rgba(0, 0, 0, 0.5); /* Restore border color */
+        outline: none; \* Remove outline *\
+        border-color: rgba(0, 0, 0, 0.5); \* Restore border color *\
     }
 
     .textbox::placeholder {

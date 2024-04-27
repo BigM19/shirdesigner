@@ -1,3 +1,16 @@
-﻿IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}ShirtDesigner_Items]') AND type in (N'U'))
-DROP TABLE {databaseOwner}[{objectQualifier}ShirtDesigner_Items]
+﻿
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}UsableGraphics') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}UsableGraphics
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}CustomDesign') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}CustomDesign
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}ProductOrder') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}ProductOrder
+GO
+
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}{objectQualifier}DesignableProduct') AND type in (N'U'))
+DROP TABLE {databaseOwner}{objectQualifier}DesignableProduct
 GO

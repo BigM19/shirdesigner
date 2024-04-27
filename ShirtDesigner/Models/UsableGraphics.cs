@@ -22,7 +22,6 @@ namespace bakaJzspiG.ShirtDesigner.ShirtDesigner.Models
     [TableName("ProductOrder")]
     [PrimaryKey("GraphicId", AutoIncrement = true)]
     [Cacheable("ProductOrder", CacheItemPriority.Default, 20)]
-    [Scope("ModuleId")]
     public class UsableGraphics
     {
         public int GraphicId { get; set; }

@@ -32,7 +32,6 @@ namespace bakaJzspiG.ShirtDesigner.ShirtDesigner.Controllers
             var settings = new Models.Settings();
             settings.Setting1 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("ShirtDesigner_Setting1", false);
             settings.Setting2 = ModuleContext.Configuration.ModuleSettings.GetValueOrDefault("ShirtDesigner_Setting2", System.DateTime.Now);
-
             return View(settings);
         }
 

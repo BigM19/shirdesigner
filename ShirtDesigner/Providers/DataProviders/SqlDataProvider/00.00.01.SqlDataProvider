@@ -70,6 +70,12 @@ ALTER TABLE {databaseOwner}{objectQualifier}CustomDesign WITH NOCHECK ADD CONSTR
     ON DELETE CASCADE
 GO
 
+INSERT INTO [DesignableProduct] (
+    [ItemName], [ItemDescription], [ItemSize], [ItemPrice], [ItemPic]
+    ) VALUES
+    ('Baseball Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'C:\DNN\DesktopModules\MVC\shirtdesigner\ShirtDesigner\Assets\ProductImages\baseballShirt.png')
+GO
+
 /************************************************************/
 /*****              SqlDataProvider                     *****/
 /************************************************************/
