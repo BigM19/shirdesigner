@@ -112,6 +112,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ProductImages\baseballShirt.png" />
+    <Content Include="Assets\ProductImages\blackLong.png" />
+    <Content Include="Assets\ProductImages\brownLong.png" />
+    <Content Include="Assets\ProductImages\cherryShirt.png" />
+    <Content Include="Assets\ProductImages\greyAthletic.png" />
+    <Content Include="Assets\ProductImages\mustardKid.png" />
+    <Content Include="Assets\ProductImages\navyKid.png" />
+    <Content Include="Assets\ProductImages\oliveShirt.png" />
+    <Content Include="Assets\ProductImages\pinkShirt.png" />
+    <Content Include="Assets\ProductImages\rustShirt.png" />
+    <Content Include="Assets\ProductImages\sandShirt.png" />
+    <Content Include="Assets\ProductImages\sunflowerShirt.png" />
+    <Content Include="Assets\ProductImages\sunsetShirt.png" />
+    <Content Include="Assets\ProductImages\whiteKid.png" />
+    <Content Include="Assets\ProductImages\whiteShirt.png" />
     <Content Include="Documentation\Documentation.css" />
     <Content Include="Documentation\Documentation.html" />
     <Content Include="License.txt" />
@@ -144,7 +159,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets\CreatedDesigns\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
