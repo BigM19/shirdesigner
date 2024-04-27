@@ -106,9 +106,13 @@
     <Compile Include="Components\FeatureController.cs" />
     <Compile Include="Components\ItemManager.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Models\CustomDesign.cs" />
+    <Compile Include="Models\DesignableProducts.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Controllers\ItemController.cs" />
+    <Compile Include="Models\ProductOrder.cs" />
     <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\UsableGraphics.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
