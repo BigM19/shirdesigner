@@ -77,7 +77,7 @@ GO
 INSERT INTO [DesignableProduct] (
     [ItemName], [ItemDescription], [ItemSize], [ItemPrice], [ItemPic]
     ) VALUES
-    ('Baseball Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\Assets\ProductImages\baseballShirt.png')
+    ('Baseball Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'baseballShirt.png')
 GO
 
 /************************************************************/

@@ -1,0 +1,19 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<DesignableProduct>
+
+@using System.Web.Mvc.Html
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+@using Designer.Dnn.Designer.Models
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/desktopmodules/mvc/designer/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Póló</h2>
+<div class="product-card">
+    <h2 class="product-name">@Model.ItemName</h2>
+    <p class="product-price">@Model.ItemPrice</p>
+</div>
+

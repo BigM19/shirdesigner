@@ -8,6 +8,6 @@
     "\\ShirtDesigner\\Providers\\DataProviders",
     "\\ShirtDesigner\\Providers\\DataProviders\\SqlDataProvider"
   ],
-  "SelectedNode": "\\ShirtDesigner\\Controllers",
+  "SelectedNode": "\\ShirtDesigner\\Controllers\\ProductGridController.cs",
   "PreviewInSolutionExplorer": false
 }

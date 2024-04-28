@@ -1,4 +1,4 @@
-﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable<Designer.Dnn.Designer.Models.DesignableProduct>>
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable<Designer.Dnn.Designer.Models.DesignableProduct>> 
 
 @using System.Web.Mvc.Html
 @using System.Text.RegularExpressions
@@ -13,14 +13,16 @@
 
 <h1>Tervezhető Termékek</h1>
 
-<div class="container">
+<div class="product-grid">
     @foreach (var item in Model)
     {
         <div class="product-card">
             <h2 class="product-name">@item.ItemName</h2>
-            <img src="@item.ItemPic" alt="Product 1">
-            <p class="product-price">@item.ItemPrice</p>
-            <a href="#" class="design-link">Tervezd meg</a>
+            <img src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+item.ItemPic)" alt="Product 1">
+            <div class="card-footer">
+                <p class="product-price">@item.ItemPrice Ft</p>
+                <button asp-controller="DesignableProduct" asp-action="Detail" asp-route-id="@item.ItemId" type="button" class="design-btn">Tervezd meg</button>
+            </div>
         </div>
     }
     
