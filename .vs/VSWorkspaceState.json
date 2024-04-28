@@ -1,16 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\App_LocalResources",
-    "\\obj\\Debug",
-    "\\Providers\\DataProviders",
     "\\ShirtDesigner",
     "\\ShirtDesigner\\Controllers",
     "\\ShirtDesigner\\Models",
-    "\\ShirtDesigner\\Views",
-    "\\ShirtDesigner\\Views\\Item",
-    "\\ShirtDesigner\\Views\\ProductGrid"
+    "\\ShirtDesigner\\Providers",
+    "\\ShirtDesigner\\Providers\\DataProviders",
+    "\\ShirtDesigner\\Providers\\DataProviders\\SqlDataProvider"
   ],
-  "SelectedNode": "\\ShirtDesigner\\Controllers\\SettingsController.cs",
+  "SelectedNode": "\\ShirtDesigner\\Controllers",
   "PreviewInSolutionExplorer": false
 }

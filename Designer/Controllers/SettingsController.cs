@@ -22,10 +22,7 @@ namespace Designer.Dnn.Designer.Controllers
     [DnnHandleError]
     public class SettingsController : DnnController
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
+
         [HttpGet]
         public ActionResult Settings()
         {

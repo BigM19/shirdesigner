@@ -52,7 +52,7 @@
                 <moduleControls>
                   <moduleControl>
                     <controlKey />
-                    <controlSrc>Designer.Dnn.Designer.Controllers/Item/Index.mvc</controlSrc>
+                    <controlSrc>Designer.Dnn.Designer.Controllers/DesignableProduct/Index.mvc</controlSrc>
                     <supportsPartialRendering>False</supportsPartialRendering>
                     <controlTitle />
                     <controlType>View</controlType>

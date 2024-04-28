@@ -1,0 +1,27 @@
+﻿@inherits DotNetNuke.Web.Mvc.Framework.DnnWebViewPage<IEnumerable<Designer.Dnn.Designer.Models.DesignableProduct>>
+
+@using System.Web.Mvc.Html
+@using System.Text.RegularExpressions
+@using DotNetNuke.Web.Mvc.Helpers
+
+@using Designer.Dnn.Designer.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/desktopmodules/mvc/designer/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Tervezhető Termékek</h1>
+
+<div class="container">
+    @foreach (var item in Model)
+    {
+        <div class="product-card">
+            <h2 class="product-name">@item.ItemName</h2>
+            <img src="@item.ItemPic" alt="Product 1">
+            <p class="product-price">@item.ItemPrice</p>
+            <a href="#" class="design-link">Tervezd meg</a>
+        </div>
+    }
+    
+</div>

@@ -1,0 +1,10 @@
+C:\DNN\DesktopModules\bin\Designer.dll.config
+C:\DNN\DesktopModules\bin\Designer.dll
+C:\DNN\DesktopModules\bin\Designer.pdb
+C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Debug\Designer.csproj.AssemblyReference.cache
+C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Debug\Designer.Dnn.Designer.App_LocalResources.Settings.resources
+C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Debug\Designer.csproj.GenerateResource.cache
+C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Debug\Designer.csproj.CoreCompileInputs.cache
+C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Debug\Designer.csproj.CopyComplete
+C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Debug\Designer.dll
+C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Debug\Designer.pdb
