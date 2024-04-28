@@ -1,60 +1,49 @@
-/* General styling for the product grid */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Creates three columns */
-    gap: 20px; /* Spacing between cards */
-    padding: 20px; /* Padding around the entire grid */
+    grid-template-columns: repeat(3, 1fr); /* 3 items per row */
+    gap: 20px;
+    padding: 20px;
 }
 
-/* Styling for each product card */
 .product-card {
-    border: 1px solid #ccc; /* Light gray border */
-    border-radius: 10px; /* Rounded edges */
-    padding: 10px; /* Padding inside each card */
-    background-color: #f9f9f9; /* Light background color */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center; /* Centering text and contents in the card */
 }
 
-
-
-/* Styling for the product name */
 .product-name {
-    font-size: 1.25em; /* Larger text for product name */
-    margin-bottom: 5px; /* Space below the product name */
-    border-bottom: 2px solid #ddd; /* Border under the product name */
-    padding-bottom: 5px; /* Padding below the text before the border */
-    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
 }
 
-/* Styling for the product image */
 img {
-    width: 100%; /* Make the image fill the container */
-    height: auto; /* Maintain aspect ratio */
-    border-bottom: 1px solid #ddd; /* Border under the image */
+    max-width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ccc;
 }
 
-/* Styling for the product price */
+.card-footer {
+    display: flex;
+    justify-content: space-between; /* Aligning items on the same line with space between */
+    align-items: center;
+    margin-top: 10px; /* Space between image and footer */
+}
+
 .product-price {
-    font-size: 1.2em; /* Slightly larger text for price */
-    color: #333; /* Darker text color for better readability */
-    margin-top: 5px; /* Space above the price */
-    padding-bottom: 5px; /* Padding below the text */
-    border-bottom: 1px solid #ddd; /* Border under the price */
+    font-weight: bold;
 }
 
-/* Styling for the design button */
 .design-btn {
-    background-color: #007BFF; /* Bootstrap primary color */
-    color: white; /* White text */
-    border: none; /* No border */
-    padding: 10px 20px; /* Padding around text */
-    margin-top: 10px; /* Space above the button */
-    border-radius: 5px; /* Rounded edges for the button */
-    cursor: pointer; /* Pointer cursor on hover */
-    text-align: center; /* Center the text */
-    display: block; /* Make the button block to fill the width */
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
     .design-btn:hover {
-        background-color: #0056b3; /* Darken button on hover */
+        background-color: #0056b3;
     }

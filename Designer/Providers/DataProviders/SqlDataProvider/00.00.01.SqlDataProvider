@@ -77,7 +77,18 @@ GO
 INSERT INTO [DesignableProduct] (
     [ItemName], [ItemDescription], [ItemSize], [ItemPrice], [ItemPic]
     ) VALUES
-    ('Baseball Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'baseballShirt.png')
+    ('Baseball Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'baseballShirt.png'),
+    ('Black Long Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'blackLong.png'),
+    ('Brown Long Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'brownLong.png'),
+    ('Cherry Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'cherryShirt.png'),
+    ('Grey Athletic Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'greyAthletic.png'),
+    ('Olive Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'oliveShirt.png'),
+    ('Pink Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'pinkShirt.png'),
+    ('Rust Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'rustShirt.png'),
+    ('Sand Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'sandShirt.png'),
+    ('Sunflower Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'sunflowerShirt.png'),
+    ('Sunset Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'sunsetShirt.png'),
+    ('White Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'whiteShirt.png')
 GO
 
 /************************************************************/
