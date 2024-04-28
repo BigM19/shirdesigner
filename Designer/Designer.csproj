@@ -263,15 +263,12 @@
     <Content Include="Assets\ProductImages\brownLong.png" />
     <Content Include="Assets\ProductImages\cherryShirt.png" />
     <Content Include="Assets\ProductImages\greyAthletic.png" />
-    <Content Include="Assets\ProductImages\mustardKid.png" />
-    <Content Include="Assets\ProductImages\navyKid.png" />
     <Content Include="Assets\ProductImages\oliveShirt.png" />
     <Content Include="Assets\ProductImages\pinkShirt.png" />
     <Content Include="Assets\ProductImages\rustShirt.png" />
     <Content Include="Assets\ProductImages\sandShirt.png" />
     <Content Include="Assets\ProductImages\sunflowerShirt.png" />
     <Content Include="Assets\ProductImages\sunsetShirt.png" />
-    <Content Include="Assets\ProductImages\whiteKid.png" />
     <Content Include="Assets\ProductImages\whiteShirt.png" />
     <Content Include="Documentation\Documentation.css" />
     <Content Include="Documentation\Documentation.html" />

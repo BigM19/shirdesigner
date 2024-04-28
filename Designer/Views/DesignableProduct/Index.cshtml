@@ -11,7 +11,7 @@
     Layout = "~/desktopmodules/mvc/designer/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Tervezhető Termékek</h1>
+<h1>Tervezhető Pólók</h1>
 
 <div class="product-grid">
     @foreach (var item in Model)
@@ -21,7 +21,7 @@
             <img src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+item.ItemPic)" alt="Product 1">
             <div class="card-footer">
                 <p class="product-price">@item.ItemPrice Ft</p>
-                <button asp-controller="DesignableProduct" asp-action="Detail" asp-route-id="@item.ItemId" type="button" class="design-btn">Tervezd meg</button>
+                <a href="@Url.Action("Detail", "DesignableProduct", new { id = item.ItemId })" class="design-btn">Tervezd meg</a>
             </div>
         </div>
     }
