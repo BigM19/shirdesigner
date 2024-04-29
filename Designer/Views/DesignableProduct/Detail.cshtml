@@ -11,10 +11,13 @@
     Layout = "~/desktopmodules/mvc/designer/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Póló</h2>
-<div class="product-card">
-    <h2 class="product-name">@Model.ItemName</h2>
-    <img src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+Model.ItemPic)" alt="Product 1">
-    <p class="product-price">@Model.ItemPrice</p>
+
+<div class="designer">
+    <form action="@Url.Action("UploadGraphic", "DesignableProduct")" method="post" enctype="multipart/form-data">
+        <label for="graphicUpload">Upload Graphic:</label>
+        <input type="file" name="graphicFile" accept="image/*" required />
+        <button type="submit">Upload Image</button>
+    </form>
+    <a href="@Url.Action("GetUsableGraphics", "DesignableProduct")" class="design-btn">Válassz képet</a>
 </div>
 

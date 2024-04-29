@@ -246,6 +246,7 @@
     <Compile Include="Components\ItemManager.cs" />
     <Compile Include="Controllers\DesignableProductController.cs" />
     <Compile Include="Controllers\SettingsController.cs" />
+    <Compile Include="Controllers\UsableGraphicsController.cs" />
     <Compile Include="Models\CustomDesign.cs" />
     <Compile Include="Models\DesignableProduct.cs" />
     <Compile Include="Models\Item.cs" />
@@ -256,6 +257,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\BtnImg\text.png" />
+    <Content Include="Assets\BtnImg\upload.png" />
     <Content Include="Assets\ProductImages\baseballShirt.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -304,6 +307,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\CreatedDesigns\" />
+    <Folder Include="Assets\UsableGraphics\" />
+    <Folder Include="Views\UsableGraphic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config">
@@ -314,6 +319,7 @@
     <Content Include="Views\Settings\Settings.cshtml" />
     <Content Include="Views\DesignableProduct\Index.cshtml" />
     <Content Include="Views\DesignableProduct\Detail.cshtml" />
+    <Content Include="Views\UsableGraphics\GetUsableGraphics.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
