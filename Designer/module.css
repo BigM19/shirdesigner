@@ -1,95 +1,318 @@
+/*Colors*/
+:root {
+    --color_1: #738290;
+    --color_2: #A1B5D8;
+    --color_3: #FFFCF7;
+    --color_4: #E4F0D0;
+    --color_5: #C2D8B9;
+    --color_6: rgb(50, 50, 50);
+    --color_7: rgb(100, 100, 100);
+}
+
+/* Index view*/
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 items per row */
     gap: 20px;
     padding: 20px;
+    background-color: var(--color_4);
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 15px 3px;
+    margin: 1em;
 }
 
+
 .product-card {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    text-align: center; /* Centering text and contents in the card */
+    font-family: 'comfortaa', Arial, Helvetica, sans-serif;
+    border: 1px solid var(--color_5);
+    border-radius: 4px;
+    padding: 10px 0;
+    background-color: var(--color_5);
+}
+
+.card-heading {
+    border-bottom: 1px solid transparent;
+    text-align: center;
+    background-color: var(--color_5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .product-name {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    color: var(--color_6);
     padding-bottom: 10px;
+    font-size: 18px;
 }
 
-img {
+.card-body {
+    background-color: #ECEFE9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.product-image {
     max-width: 100%;
-    height: auto;
-    border-bottom: 1px solid #ccc;
+    height: 200px;
+    width: auto;
 }
 
 .card-footer {
+    background-color: var(--color_5);
     display: flex;
     justify-content: space-between; /* Aligning items on the same line with space between */
     align-items: center;
     margin-top: 10px; /* Space between image and footer */
+    font-size: 14px;
+    padding: 0 10px;
 }
 
 .product-price {
-    font-weight: bold;
+    white-space: nowrap;
+    margin: 0;
 }
 
 .design-btn {
-    padding: 5px 10px;
-    background-color: #007BFF;
+    display: inline-block; /* Allows padding and width/height adjustments */
+    padding: 10px 20px; /* Adjust padding to size the 'button' */
+    margin: 0;
+    background-color: var(--color_1); /* Button color, e.g., a blue */
+    color: white; /* Text color */
+    text-align: center; /* Center the text inside the 'button' */
+    text-decoration: none; /* Removes underline from the link */
+    border-radius: 5px; /* Optional: adds rounded corners */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+    .design-btn:hover, .design-btn:active {
+        background-color: var(--color_2); /* Darker blue on hover/active */
+        text-decoration: none;
+    }
+
+    .design-btn:visited {
+        color: white; /* Ensures text color does not change */
+    }
+
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding: 100px 0; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 80%;
+    max-height: 70vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 10px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 10px 10px 0 0;
+}
+
+
+/* The Close Button */
+.close {
+    color: white;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+.modal-header {
+    padding: 2px 10px;
+    background-color: var(--color_5);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+#modal-body {
+    padding: 2px 16px;
+}
+
+
+#imagesContainer {
+    overflow-y: auto;
+}
+
+.grid-container {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* Creates 5 columns */
+    gap: 5px; /* Adjust the space between the grid items */
+}
+
+.grid-item {
+    /* Optional styles for alignment and sizing */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgray;
+}
+
+.graphic-img {
+    width: 100%; /* Makes image fill the container */
+    height: auto; /* Keeps image aspect ratio intact */
+}
+
+.body-no-scroll {
+    overflow: hidden; /* Prevent scrolling on body */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Detail page*/
+
+.designer {
+    display: flex; /* Aligns children in a row */
+    padding: 20px; /* Provides some padding around the items */
+    justify-content: space-between;
+}
+
+.button-container, .canvas-container, .description-container {
+    display: flex;
+    flex-direction: column; /* Organizes content vertically within each div */
+}
+
+.button-container {
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.canvas-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+#my-canvas {
+    border: 2px dashed #a19d9d;
+    position: absolute;
+    width: 280px;
+    height: 400px;
+    transform: translateY(50px)
+}
+
+.designable-shirt-img {
+    height: 600px;
+    width: 600px;
+    display: block;
+}
+
+.description-container {
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.size-selector {
+    display: flex;
+    flex-direction: column;
+}
+
+    .size-selector label {
+        margin-right: 10px; /* Space between each radio button label */
+    }
+
+.footer {
+    flex-basis: 100%; /* Footer takes full width of the container when wrapping occurs */
+    display: flex;
+    justify-content: flex-end; /* Distributes footer items evenly */
+    padding: 20px;
+    background-color: #ddd; /* Different background to distinguish footer */
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-    .design-btn:hover {
-        background-color: #0056b3;
+    button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
     }
 
-
-   /* Buttons on Detail page*/
-.buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-    position: absolute;
-    left: 20px;
-    top: 20px;
+.upload-button, .show-button {
+    margin: 10px;
 }
 
-#text-btn-container, #upload-btn-container {
+.img-upload {
     display: flex;
+    flex-direction: column;
+}
+
+.sizes {
+    margin: 10px 0;
+}
+
+.size-selector {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    height: 110px;
-    width: 110px;
-    border: 2px solid #000;
-    border-radius: 10px;
+    background-color: #f4f4f4; /* Light gray background */
     padding: 10px;
-    margin-bottom: 10px;
+    border: 1px solid #ccc; /* Border around the entire grid */
 }
 
-#text-label, #upload-label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-    #text-label img, #upload-label img {
-        margin-bottom: 5px;
-    }
-
-    #text-label span, #upload-label span {
-        font-size: 14px;
-        font-weight: bold;
+    .size-selector label {
+        margin: 0;
+        background-color: #fff; /* White background for each cell */
+        display: block;
         text-align: center;
+        padding: 10px;
+        border: 2px solid #ddd; /* Light border for each cell */
+        cursor: pointer;
+        transition: background-color 0.3s ease; /* Smooth transition for background color */
     }
 
-/* Hide the file inputs */
-#text-btn, #upload-btn {
-    display: none;
+    .size-selector input[type="radio"] {
+        display: none; /* Hide the default radio button */
+    }
+
+    .size-selector label:hover {
+        background-color: #eee; /* Light hover effect */
+    }
+
+    .size-selector input[type="radio"]:checked + label {
+        background-color: #007BFF; /* Blue background when selected */
+        color: #fff; /* White text when selected */
+    }
+
+.price-container {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.price {
+    margin: 0;
 }

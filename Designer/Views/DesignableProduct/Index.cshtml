@@ -17,8 +17,12 @@
     @foreach (var item in Model)
     {
         <div class="product-card">
-            <h2 class="product-name">@item.ItemName</h2>
-            <img src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+item.ItemPic)" alt="Product 1">
+            <div class="card-heading">
+                <h2 class="product-name">@item.ItemName</h2>
+            </div>
+            <div class="card-body">
+                <img class="product-image" src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+item.ItemPic)" alt="Tervezhető Póló">
+            </div>
             <div class="card-footer">
                 <p class="product-price">@item.ItemPrice Ft</p>
                 <a href="@Url.Action("Detail", "DesignableProduct", new { id = item.ItemId })" class="design-btn">Tervezd meg</a>
