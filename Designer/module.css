@@ -346,10 +346,6 @@ button {
     margin: 0;
 }
 
-#mainContent-inner {
-    display: none;
-}
-
 .textbox {
     width: 200px;
     height: 40px;

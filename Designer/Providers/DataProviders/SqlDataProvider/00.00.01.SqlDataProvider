@@ -49,7 +49,8 @@ CREATE TABLE {databaseOwner}{objectQualifier}ProductOrder
     [OrderId] int NOT NULL IDENTITY (1, 1)
         CONSTRAINT [Pk_ProductOrder] PRIMARY KEY CLUSTERED,
     [ItemId] int NOT NULL,
-    [ItemSize] int NOT NULL,
+    [SelectedSize] nvarchar(MAX) NOT NULL,
+    [DesignImg] nvarchar(MAX) NOT NULL,
     [Email] nvarchar(MAX) NOT NULL,
     )  ON [PRIMARY]
      TEXTIMAGE_ON [PRIMARY]

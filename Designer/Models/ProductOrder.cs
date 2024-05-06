@@ -15,5 +15,7 @@ namespace Designer.Dnn.Designer.Models
         public int OrderId { get; set; }
         public int ItemId { get; set; }
         public string Email { get; set; }
+        public string SelectedSize { get; set; }
+        public string DesignImg { get; set; }
     }
 }

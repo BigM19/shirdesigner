@@ -50,7 +50,7 @@
 
     </div>
     <div id="canvas-container" class="canvas-container">
-        <img src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+ Model.ItemPic)" id="background-image" class="designable-shirt-img" alt="Design" width="600" height="600">
+        <img src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+ Model.ItemPic)" id="shirt-image" class="designable-shirt-img" alt="Design" width="600" height="600">
 
         <canvas id="my-canvas" width="280" height="400"></canvas>
     </div>
@@ -137,33 +137,36 @@
     });
 </script>
 
+<script src="~/desktopmodules/mvc/designer/Scripts/MergeImage.js"></script>
+
 <script>
-    //Save merged image
     function mergeAndSaveCanvas() {
         const offScreenCanvas = document.createElement('canvas');
         const offCtx = offScreenCanvas.getContext('2d');
 
-        const backgroundImage = document.getElementById('background-image');
+        const backgroundImage = document.getElementById('shirt-image');
+
         // Assuming backgroundImage is loaded and available
         offScreenCanvas.width = backgroundImage.width;
         offScreenCanvas.height = backgroundImage.height;
 
         // Draw the background image first
-        offCtx.drawImage(backgroundImage, 0, 0);
+        offCtx.drawImage(backgroundImage, 0, 0, 600, 600);
 
         // Then draw the display canvas content over it
         const displayCanvas = document.getElementById('my-canvas');
         const startX = 160;  // Calculated X coordinate
-        const startY = 100;  // Calculated Y coordinate
+        const startY = 150;  // Calculated Y coordinate
         offCtx.drawImage(displayCanvas, startX, startY);
 
         // Export to Image
-        const dataURL = offScreenCanvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.href = dataURL;
-        link.download = 'final_design.png';
-        link.click();
+        const imageDataURL = offScreenCanvas.toDataURL('image/png');
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '@Url.Action("SaveDesign", "DesignableProduct", new { id = Model.ItemId })', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({ imageData: imageDataURL }));
+
+        window.location.reload();
     }
-
 </script>
-

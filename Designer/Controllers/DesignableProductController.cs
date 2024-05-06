@@ -90,5 +90,39 @@ namespace Designer.Dnn.Designer.Controllers
             return PartialView("GetUsableGraphics", images);
         }
 
+        [HttpPost]
+        public ActionResult SaveDesign(string imageData, int id)
+        {
+            DesignableProduct product;
+            IDataContext ctx = DataContext.Instance();
+
+            string fileName = Guid.NewGuid().ToString() + ".png";
+            string folderPath = @"C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\Assets\CreatedDesigns\";
+            string filePath = Path.Combine(folderPath, fileName);
+
+            // Converting base64 data to bytes
+            if (!String.IsNullOrEmpty(imageData))
+            {
+                imageData = imageData.Substring(imageData.IndexOf(",") + 1); // Remove the header part of the data URL
+                byte[] imageBytes = Convert.FromBase64String(imageData);
+
+                System.IO.File.WriteAllBytes(filePath, imageBytes); // Save the image
+
+                var rep2 = ctx.GetRepository<UsableGraphics>();
+
+                CustomDesign design = new CustomDesign
+                {
+                    DesignImg = imageData,
+                }
+
+            }
+
+            var rep = ctx.GetRepository<DesignableProduct>();
+            product = rep.GetById(id);
+
+            return View("Detail", product);
+
+        }
+
     }
 }
