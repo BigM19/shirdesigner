@@ -96,6 +96,17 @@
         color: white; /* Ensures text color does not change */
     }
 
+.custom-btn {
+    background-color: var(--color_2);
+    padding: 20px;
+    margin: 10px 0;
+}
+
+    .custom-btn:hover, .custom-btn:active {
+        background-color: var(--color_1);
+    }
+
+
 
 /* The Modal (background) */
 .modal {
@@ -173,9 +184,15 @@
     border: 1px solid lightgray;
 }
 
+    .grid-item:hover {
+        transform: scale(1.05); /* Scales up the item slightly */
+        border-color: black; /* Changes border color on hover */
+    }
+
 .graphic-img {
     width: 100%; /* Makes image fill the container */
     height: auto; /* Keeps image aspect ratio intact */
+    cursor: pointer;
 }
 
 .body-no-scroll {
@@ -200,8 +217,12 @@
 }
 
 .button-container {
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-start;
+}
+
+.return-button-container {
+    text-align: center; /* Center the return button */ 
 }
 
 .canvas-container {
@@ -209,6 +230,14 @@
     justify-content: center;
     align-items: center;
     position: relative;
+}
+
+.canvas-buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-evenly; /* Spread items evenly */
+    height: 70%;
+    padding-bottom: 20px; /* Padding on sides to ensure content does not touch the edges */
 }
 
 #my-canvas {
@@ -261,7 +290,7 @@ button {
         background-color: #0056b3; /* Darker shade on hover */
     }
 
-.upload-button, .show-button {
+.upload-button, .show-button, .text-button {
     margin: 10px;
 }
 
@@ -316,3 +345,31 @@ button {
 .price {
     margin: 0;
 }
+
+#mainContent-inner {
+    display: none;
+}
+
+.textbox {
+    width: 200px;
+    height: 40px;
+    border: 1px dashed #a19d9d;
+    background: none;
+    padding: 5px;
+    color: black;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Times New Roman', Times, serif;
+    z-index: 100;
+}
+
+    .textbox:focus {
+        outline: none; /* Remove outline */
+        border-color: rgba(0, 0, 0, 0.5); /* Restore border color */
+    }
+
+    .textbox::placeholder {
+        color: black;
+        text-align: center;
+    }

@@ -9,21 +9,32 @@
 @{
     ViewBag.Title = "Detail";
     Layout = null;
+
 }
 
 
 <div class="designer">
     <div class="button-container">
-
-        <div class="upload-button">
-            <form class="img-upload" action="@Url.Action("Detail", "DesignableProduct", new { id = Model.ItemId })" method="post" enctype="multipart/form-data">
-                <input type="file" name="graphicFile" accept="image/*" />
-                <button type="submit">Kép Feltöltése</button>
-            </form>
+        <div class="return-button-container">
+            <div class="return-button">
+                <a href="@Url.Action("Index", "DesignableProduct")" id="backToIndex" class="design-btn">Vissza a póló választáshoz</a>
+            </div>
         </div>
+        <div class="canvas-buttons-container ">
+            <div class="text-button">
+                <button type="button" id="addText" class="design-btn custom-btn">Szöveg hozzáadása</button>
+            </div>
 
-        <div class="show-button">
-            <button id="btnShowImages">Kép Kiválasztása</button>
+            <div class="upload-button">
+                <form class="img-upload" action="@Url.Action("Detail", "DesignableProduct", new { id = Model.ItemId })" method="post" enctype="multipart/form-data">
+                    <input type="file" name="graphicFile" accept="image/*" />
+                    <button type="submit" class="design-btn custom-btn">Kép Feltöltése</button>
+                </form>
+            </div>
+
+            <div class="show-button">
+                <button type="button" id="btnShowImages" class="design-btn custom-btn">Kép Kiválasztása</button>
+            </div>
         </div>
 
         <div id="imagesModal" class="modal">
@@ -38,8 +49,8 @@
         </div>
 
     </div>
-    <div class="canvas-container">
-        <img src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+ Model.ItemPic)" class="designable-shirt-img" alt="Design">
+    <div id="canvas-container" class="canvas-container">
+        <img src="@Url.Content("~/desktopmodules/mvc/designer/Assets/ProductImages/"+ Model.ItemPic)" id="background-image" class="designable-shirt-img" alt="Design" width="600" height="600">
 
         <canvas id="my-canvas" width="280" height="400"></canvas>
     </div>
@@ -58,6 +69,7 @@
     </div>
 </div>
 <div class="footer">
+    <button type="button" onclick="mergeAndSaveCanvas()">Save Design</button>
     <div class="price-container">
         <p class="price">@Model.ItemPrice Ft</p>
     </div>
@@ -112,94 +124,46 @@
     }
 </script>
 
+<script src="~/desktopmodules/mvc/designer/Scripts/shirtdesigner.js"></script>
+
 <script>
-    const canvas = document.getElementById('my-canvas');
-    let img = null;
-    const ctx = canvas.getContext('2d');
-    let offsetX = 0;
-    let offsetY = 0;
-    let scaledWidth = 0;
-    let scaledHeight = 0;
-
-    const resetCanvas = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-        if (img) {
-            ctx.drawImage(img, offsetX, offsetY, scaledWidth, scaledHeight);
+    //Return confirmation
+    document.getElementById('backToIndex').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the link from navigating immediately
+        var confirmLeave = confirm("Biztosan vissza akarsz térni a póló választáshoz?");
+        if (confirmLeave) {
+            window.location.href = this.href; // If confirmed, proceed to the link's href
         }
-    }
-
-    //Add image to canvas
-    function imageClicked(src) {
-        modal.style.display = "none";
-        closeModal();
-        img = new Image();
-        img.src = src;
-        img.onload = () => {
-            scaleImageToFitCanvas();
-        };
-    }
-
-    // Function to scale the image to fit the canvas
-    function scaleImageToFitCanvas() {
-        // Get the aspect ratio of the image
-        const imgAspectRatio = img.width / img.height;
-        // Get the aspect ratio of the canvas
-        const canvasAspectRatio = canvas.width / canvas.height;
-
-        // Determine whether to scale based on width or height by comparing aspect ratios
-        if (imgAspectRatio > canvasAspectRatio) {
-            // Image is wider in proportion to the canvas
-            scaledWidth = canvas.width; // Use the full width of the canvas
-            scaledHeight = scaledWidth / imgAspectRatio; // Adjust height to maintain aspect ratio
-        } else {
-            // Image is taller in proportion to the canvas
-            scaledHeight = canvas.height; // Use the full height of the canvas
-            scaledWidth = scaledHeight * imgAspectRatio; // Adjust width to maintain aspect ratio
-        }
-
-        offsetX = (canvas.width - scaledWidth) / 2; // Center image horizontally
-        offsetY = (canvas.height - scaledHeight) / 2; // Center image vertically
-        resetCanvas();
-    }
-
-    let draggable = false;
-
-    canvas.onmousedown = (e) => {
-        const clickX = e.layerX;
-        const clickY = e.layerY;
-        // Calculate middle position of the image
-        const imageMiddleX = offsetX + scaledWidth / 2;
-        const imageMiddleY = offsetY + scaledHeight / 2;
-        // Check if the click occurred within the boundaries of the image
-        if (clickX >= offsetX && clickX <= offsetX + scaledWidth && clickY >= offsetY && clickY <= offsetY + scaledHeight) {
-            // Calculate offset from the middle of the image
-            offsetX += clickX - imageMiddleX;
-            offsetY += clickY - imageMiddleY;
-            resetCanvas();
-            draggable = true;
-        }
-
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'Delete') {
-                img = null;
-                resetCanvas();
-            }
-        });
-    }
-
-    canvas.onmousemove = (e) => {
-        if (draggable) {
-            offsetX += e.movementX;
-            offsetY += e.movementY;
-            resetCanvas();
-        }
-    }
-    canvas.onmouseup = (e) => {
-        draggable = false;
-    }
-    canvas.onmouseout = (e) => {
-        draggable = false;
-    }
+    });
 </script>
 
+<script>
+    //Save merged image
+    function mergeAndSaveCanvas() {
+        const offScreenCanvas = document.createElement('canvas');
+        const offCtx = offScreenCanvas.getContext('2d');
+
+        const backgroundImage = document.getElementById('background-image');
+        // Assuming backgroundImage is loaded and available
+        offScreenCanvas.width = backgroundImage.width;
+        offScreenCanvas.height = backgroundImage.height;
+
+        // Draw the background image first
+        offCtx.drawImage(backgroundImage, 0, 0);
+
+        // Then draw the display canvas content over it
+        const displayCanvas = document.getElementById('my-canvas');
+        const startX = 160;  // Calculated X coordinate
+        const startY = 100;  // Calculated Y coordinate
+        offCtx.drawImage(displayCanvas, startX, startY);
+
+        // Export to Image
+        const dataURL = offScreenCanvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.href = dataURL;
+        link.download = 'final_design.png';
+        link.click();
+    }
+
+</script>
 
