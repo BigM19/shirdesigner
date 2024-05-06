@@ -8,6 +8,5 @@ C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Release\Designer.csproj.Cor
 C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Release\Designer.csproj.CopyComplete
 C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Release\Designer.dll
 C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Release\Designer.pdb
-C:\DNN\DesktopModules\bin\Assets\ProductImages\baseballShirt.png
 C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Release\Designer.csproj.SuggestedBindingRedirects.cache
 C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\obj\Release\Designer.dll.config
