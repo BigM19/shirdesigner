@@ -69,13 +69,23 @@
     </div>
 </div>
 <div class="footer">
-    <button type="button" onclick="mergeAndSaveCanvas()">Save Design</button>
     <div class="price-container">
         <p class="price">@Model.ItemPrice Ft</p>
     </div>
     <div class="order">
-        <button>Megrendelés</button>
+        <button type="button" id="orderButton" class="design-btn">Megrendelés</button>
     </div>
+
+    <!-- Modal for email input -->
+    <div id="emailModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Kérlek add meg az email címed a rendelés leadásához:</p>
+            <input type="email" id="emailInput" placeholder="Email">
+            <button type="button" id="confirmOrder" class="custom-btn">Rendelés Leadása</button>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -122,25 +132,32 @@
             el.classList.remove('hidden'); // Remove the class to show the elements again
         });
     }
-</script>
 
-<script src="~/desktopmodules/mvc/designer/Scripts/shirtdesigner.js"></script>
+    //Rendelés
 
-<script>
-    //Return confirmation
-    document.getElementById('backToIndex').addEventListener('click', function (event) {
-        event.preventDefault(); // Prevent the link from navigating immediately
-        var confirmLeave = confirm("Biztosan vissza akarsz térni a póló választáshoz?");
-        if (confirmLeave) {
-            window.location.href = this.href; // If confirmed, proceed to the link's href
+    document.getElementById('orderButton').addEventListener('click', function() {
+        // Check if a size is selected
+        if (!document.querySelector('input[name="shirtSize"]:checked')) {
+            alert('Kérlek válassz méretet a rendeléshez!');
+            return;
         }
+
+        // Show modal for email input
+        document.getElementById('emailModal').style.display = 'block';
     });
-</script>
 
-<script src="~/desktopmodules/mvc/designer/Scripts/MergeImage.js"></script>
+    // Handle order confirmation
+    document.getElementById('confirmOrder').addEventListener('click', function () {
+        var Email = document.getElementById('emailInput').value;
+        if (!Email) {
+            alert('Kérlek add meg az email címedet.');
+            return;
+        }
 
-<script>
-    function mergeAndSaveCanvas() {
+        // Get selected size and design image
+        var selectedSize = document.querySelector('input[name="shirtSize"]:checked').value;
+
+        //Save design
         const offScreenCanvas = document.createElement('canvas');
         const offCtx = offScreenCanvas.getContext('2d');
 
@@ -157,16 +174,34 @@
         const displayCanvas = document.getElementById('my-canvas');
         const startX = 160;  // Calculated X coordinate
         const startY = 150;  // Calculated Y coordinate
+
         offCtx.drawImage(displayCanvas, startX, startY);
 
         // Export to Image
         const imageDataURL = offScreenCanvas.toDataURL('image/png');
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '@Url.Action("SaveDesign", "DesignableProduct", new { id = Model.ItemId })', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({ imageData: imageDataURL }));
+        var itemId = '@Model.ItemId'
 
-        window.location.reload();
-    }
+        // Send data to the server
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '@Url.Action("CreateOrder", "DesignableProduct", new { id = Model.ItemId })', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({ imageData: imageDataURL, SelectedSize: selectedSize, email: Email }));
+    });
+
 </script>
+
+<script src="~/desktopmodules/mvc/designer/Scripts/shirtdesigner.js"></script>
+
+<script>
+    //Return confirmation
+    document.getElementById('backToIndex').addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the link from navigating immediately
+        var confirmLeave = confirm("Biztosan vissza akarsz térni a póló választáshoz?");
+        if (confirmLeave) {
+            window.location.href = this.href; // If confirmed, proceed to the link's href
+        }
+    });
+</script>       
+
+

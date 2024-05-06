@@ -12,9 +12,6 @@
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}UsableGraphics]') AND type in (N'U'))
 DROP TABLE {databaseOwner}[{objectQualifier}UsableGraphics]
 GO
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}CustomDesign]') AND type in (N'U'))
-DROP TABLE {databaseOwner}[{objectQualifier}CustomDesign]
-GO
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'{databaseOwner}[{objectQualifier}ProductOrder]') AND type in (N'U'))
 DROP TABLE {databaseOwner}[{objectQualifier}ProductOrder]
 GO
@@ -61,27 +58,13 @@ ALTER TABLE {databaseOwner}{objectQualifier}ProductOrder WITH NOCHECK ADD CONSTR
     ON DELETE CASCADE
 GO
 
-CREATE TABLE {databaseOwner}{objectQualifier}CustomDesign
-    (
-    [DesignId] int NOT NULL IDENTITY (1, 1)
-        CONSTRAINT [Pk_CustomDesign] PRIMARY KEY CLUSTERED,
-    [OrderId] int NOT NULL, 
-    [DesignImg] nvarchar(MAX) NOT NULL,
-    )  ON [PRIMARY]
-     TEXTIMAGE_ON [PRIMARY]
-GO
-
-ALTER TABLE {databaseOwner}{objectQualifier}CustomDesign WITH NOCHECK ADD CONSTRAINT [FK_ProductOrder_CustomDesign] FOREIGN KEY ([OrderId])
-    REFERENCES {databaseOwner}{objectQualifier}ProductOrder ([OrderId])
-    ON DELETE CASCADE
-GO
 
 INSERT INTO [DesignableProduct] (
     [ItemName], [ItemDescription], [ItemSize], [ItemPrice], [ItemPic]
     ) VALUES
-    ('Baseball Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'baseballShirt.png'),
-    ('Black Long Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'blackLong.png'),
-    ('Brown Long Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'brownLong.png'),
+    ('Baseball Shirt', 'Itt lesz a póló leírása', 'XS,S,M,L,XL', 3500, 'baseballShirt.png'),
+    ('Black Long Shirt', 'Itt lesz a póló leírása', 'XS,S,M,L,XL', 3500, 'blackLong.png'),
+    ('Brown Long Shirt', 'Itt lesz a póló leírása', 'XS,S,M,L, XL', 3500, 'brownLong.png'),
     ('Cherry Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'cherryShirt.png'),
     ('Grey Athletic Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'greyAthletic.png'),
     ('Olive Shirt', 'Itt lesz a póló leírása', 'XS, S, M, L, XL', 3500, 'oliveShirt.png'),

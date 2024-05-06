@@ -91,10 +91,10 @@ namespace Designer.Dnn.Designer.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveDesign(string imageData, int id)
+        public ActionResult CreateOrder(string imageData, int id, string SelectedSize, string email)
         {
-            DesignableProduct product;
             IDataContext ctx = DataContext.Instance();
+            var rep = ctx.GetRepository<ProductOrder>();
 
             string fileName = Guid.NewGuid().ToString() + ".png";
             string folderPath = @"C:\DNN\DesktopModules\MVC\shirtdesigner\Designer\Assets\CreatedDesigns\";
@@ -108,20 +108,25 @@ namespace Designer.Dnn.Designer.Controllers
 
                 System.IO.File.WriteAllBytes(filePath, imageBytes); // Save the image
 
-                var rep2 = ctx.GetRepository<UsableGraphics>();
-
-                CustomDesign design = new CustomDesign
+                ProductOrder order = new ProductOrder
                 {
-                    DesignImg = imageData,
+                    ItemId = id,
+                    Email = email,
+                    SelectedSize = SelectedSize,
+                    DesignImg = fileName
+                };
+
+                try
+                {
+                    rep.Insert(order);
+                    ctx.Commit();
                 }
-
+                catch (Exception ex)
+                {
+                    ViewBag.ErrorMessage = ex.Message;
+                }
             }
-
-            var rep = ctx.GetRepository<DesignableProduct>();
-            product = rep.GetById(id);
-
-            return View("Detail", product);
-
+            return View("Index");
         }
 
     }
