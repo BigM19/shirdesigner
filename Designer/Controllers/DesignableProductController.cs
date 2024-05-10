@@ -91,7 +91,7 @@ namespace Designer.Dnn.Designer.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateOrder(string imageData, int id, string SelectedSize, string email)
+        public ActionResult CreateOrder(int id, string imageData, string email, string selectedSize )
         {
             IDataContext ctx = DataContext.Instance();
             var rep = ctx.GetRepository<ProductOrder>();
@@ -112,7 +112,7 @@ namespace Designer.Dnn.Designer.Controllers
                 {
                     ItemId = id,
                     Email = email,
-                    SelectedSize = SelectedSize,
+                    SelectedSize = selectedSize,
                     DesignImg = fileName
                 };
 
@@ -126,7 +126,8 @@ namespace Designer.Dnn.Designer.Controllers
                     ViewBag.ErrorMessage = ex.Message;
                 }
             }
-            return View("Index");
+
+            return RedirectToAction("Index", "DesignableProduct");
         }
 
     }

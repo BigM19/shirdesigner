@@ -12,7 +12,6 @@
 
 }
 
-
 <div class="designer">
     <div class="button-container">
         <div class="return-button-container">
@@ -22,8 +21,8 @@
         </div>
         <div class="canvas-buttons-container ">
             @*<div class="text-button">
-                <button type="button" id="addText" class="design-btn custom-btn">Szöveg hozzáadása</button>
-            </div>*@
+                    <button type="button" id="addText" class="design-btn custom-btn">Szöveg hozzáadása</button>
+                </div>*@
 
             <div class="upload-button">
                 <form class="img-upload" action="@Url.Action("Detail", "DesignableProduct", new { id = Model.ItemId })" method="post" enctype="multipart/form-data">
@@ -43,7 +42,7 @@
                     <span class="close">&times;</span>
                 </div>
                 <div id="modal-body">
-                    
+
                 </div>
             </div>
         </div>
@@ -58,35 +57,42 @@
         <div class="description">
             <p>@Model.ItemDescription</p>
         </div>
+    </div>
+</div>
+<div class="footer">
+    <form id="orderForm" action="@Url.Action("CreateOrder", "DesignableProduct", new { id = Model.ItemId })" method="post">
+        <input type="hidden" name="imageData" id="imageDataField">
+        <div class="price-container">
+            <p class="price">@Model.ItemPrice Ft</p>
+        </div>
         <div class="size-selector">
             <p class="sizes">Méretek:</p>
             @foreach (var size in Model.ItemSize.Split(','))
             {
-                <input type="radio" id="@size" name="shirtSize" value="@size" />
-                <label for="@size" >@size</label>
+                <input type="radio" id="@size" name="selectedSize" value="@size" required />
+                <label for="@size">@size</label>
             }
         </div>
-    </div>
-</div>
-<div class="footer">
-    <div class="price-container">
-        <p class="price">@Model.ItemPrice Ft</p>
-    </div>
-    <div class="order">
-        <button type="button" id="orderButton" class="design-btn">Megrendelés</button>
-    </div>
-
-    <!-- Modal for email input -->
-    <div id="emailModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Kérlek add meg az email címed a rendelés leadásához:</p>
-            <input type="email" id="emailInput" placeholder="Email">
-            <button type="button" id="confirmOrder" class="custom-btn">Rendelés Leadása</button>
+        <div class="order">
+            <button type="button" id="orderButton" class="design-btn">Megrendelés</button>
         </div>
-    </div>
 
+        <!-- Modal for email input -->
+        <div id="emailModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Kérlek add meg az email címed a rendelés leadásához:</p>
+                <input type="email" name="email" id="email" placeholder="email@example.com" required>
+                <button type="submit" id="confirmOrder" class="custom-btn">Rendelés Leadása</button>
+            </div>
+        </div>
+    </form>
 </div>
+
+
+
+
+
 
 <script>
     // Get the modal
@@ -117,6 +123,7 @@
     window.onclick = function (event) {
         if (event.target == modal) {
             modal.style.display = "none";
+            orderModal.style.display = "none";
             closeModal();
         }
     }
@@ -135,29 +142,7 @@
 
     //Rendelés
 
-    document.getElementById('orderButton').addEventListener('click', function() {
-        // Check if a size is selected
-        if (!document.querySelector('input[name="shirtSize"]:checked')) {
-            alert('Kérlek válassz méretet a rendeléshez!');
-            return;
-        }
-
-        // Show modal for email input
-        document.getElementById('emailModal').style.display = 'block';
-    });
-
-    // Handle order confirmation
-    document.getElementById('confirmOrder').addEventListener('click', function () {
-        var Email = document.getElementById('emailInput').value;
-        if (!Email) {
-            alert('Kérlek add meg az email címedet.');
-            return;
-        }
-
-        // Get selected size and design image
-        var selectedSize = document.querySelector('input[name="shirtSize"]:checked').value;
-
-        //Save design
+    document.getElementById('orderForm').addEventListener('submit', function (event) {
         const offScreenCanvas = document.createElement('canvas');
         const offCtx = offScreenCanvas.getContext('2d');
 
@@ -174,24 +159,33 @@
         const displayCanvas = document.getElementById('my-canvas');
         const startX = 160;  // Calculated X coordinate
         const startY = 150;  // Calculated Y coordinate
-
         offCtx.drawImage(displayCanvas, startX, startY);
 
         // Export to Image
         const imageDataURL = offScreenCanvas.toDataURL('image/png');
 
-        var itemId = '@Model.ItemId'
+        document.getElementById('imageDataField').value = imageDataURL;
 
-        // Send data to the server
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '@Url.Action("CreateOrder", "DesignableProduct", new { id = Model.ItemId })', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify({ imageData: imageDataURL, SelectedSize: selectedSize, email: Email }));
+        alert('Sikeres Megrendelés');
     });
+
+    document.getElementById('orderButton').addEventListener('click', function() {
+        // Check if a size is selected
+        if (!document.querySelector('input[name="selectedSize"]:checked')) {
+            alert('Kérlek válassz méretet a rendeléshez!');
+            return;
+        }
+
+        // Show modal for email input
+        document.getElementById('emailModal').style.display = 'block';
+        openModal();
+    });
+
 
 </script>
 
 <script src="~/desktopmodules/mvc/designer/Scripts/shirtdesigner.js"></script>
+
 
 <script>
     //Return confirmation
@@ -202,6 +196,6 @@
             window.location.href = this.href; // If confirmed, proceed to the link's href
         }
     });
-</script>       
+</script>
 
 

@@ -259,20 +259,10 @@
     align-items: center;
 }
 
-
-.size-selector {
-    display: flex;
-    flex-direction: column;
-}
-
-    .size-selector label {
-        margin-right: 10px; /* Space between each radio button label */
-    }
-
 .footer {
     flex-basis: 100%; /* Footer takes full width of the container when wrapping occurs */
     display: flex;
-    justify-content: flex-end; /* Distributes footer items evenly */
+    justify-content: space-evenly; /* Distributes footer items evenly */
     padding: 20px;
     background-color: #ddd; /* Different background to distinguish footer */
 }
@@ -300,12 +290,11 @@ button {
 }
 
 .sizes {
-    margin: 10px 0;
+    margin: 10px;
 }
 
 .size-selector {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     background-color: #f4f4f4; /* Light gray background */
     padding: 10px;
@@ -314,6 +303,8 @@ button {
 
     .size-selector label {
         margin: 0;
+        width: 44px;
+        height: 44px;
         background-color: #fff; /* White background for each cell */
         display: block;
         text-align: center;
@@ -369,3 +360,7 @@ button {
         color: black;
         text-align: center;
     }
+
+.order {
+    margin-top: 15px;
+}

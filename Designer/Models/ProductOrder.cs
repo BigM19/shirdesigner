@@ -6,9 +6,9 @@ using System.Web.Caching;
 
 namespace Designer.Dnn.Designer.Models
 {
-    [TableName("UsableGraphics")]
+    [TableName("ProductOrder")]
     [PrimaryKey("OrderId", AutoIncrement = true)]
-    [Cacheable("UsableGraphics", CacheItemPriority.Default, 20)]
+    [Cacheable("ProductOrder", CacheItemPriority.Default, 20)]
     [Scope("ModuleId")]
     public class ProductOrder
     {
