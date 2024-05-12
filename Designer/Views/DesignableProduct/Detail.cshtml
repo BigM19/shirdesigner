@@ -21,8 +21,8 @@
     <div class="button-container">
         <div class="canvas-buttons-container ">
             @*<div class="text-button">
-                <button type="button" id="addText" class="design-btn custom-btn">Szöveg hozzáadása</button>
-            </div>*@
+                    <button type="button" id="addText" class="design-btn custom-btn">Szöveg hozzáadása</button>
+                </div>*@
 
             <div class="upload-button">
                 <form class="img-upload" action="@Url.Action("Detail", "DesignableProduct", new { Id = Model.ItemId })" method="post" enctype="multipart/form-data">
@@ -35,10 +35,6 @@
                 <button type="button" id="btnShowImages" class="design-btn custom-btn">Kép Kiválasztása</button>
             </div>
 
-        </div>
-
-        <div class="description-container">
-            <p class="description">@Model.ItemDescription</p>
         </div>
 
         <div id="imagesModal" class="modal">
@@ -59,38 +55,49 @@
 
         <canvas id="my-canvas" width="280" height="400"></canvas>
     </div>
-</div>
-<div class="footer">
-    <form id="orderForm" action="@Url.Action("CreateOrder", "DesignableProduct", new { id = Model.ItemId })" method="post">
-        <input type="hidden" name="imageData" id="imageDataField">
-        <div class="size-selector">
-            <p class="sizes">Méretek:</p>
-            @foreach (var size in Model.ItemSize.Split(','))
-            {
-                <input type="radio" id="@size" name="selectedSize" value="@size" required />
-                <label for="@size">@size</label>
-            }
-        </div>
-        <div class="order">
-            <p class="price">@Model.ItemPrice Ft</p>
-            <button type="button" id="orderButton" class="design-btn">Megrendelés</button>
-        </div>
+    <div class="order-container">
+        <form id="orderForm" action="@Url.Action("CreateOrder", "DesignableProduct", new { id = Model.ItemId })" method="post">
+            <div class="data-container">
+                <input type="hidden" name="imageData" id="imageDataField">
 
-        <!-- Modal for email input -->
-        <div id="emailModal" class="modal">
-            <div class="modal-content">
-                <span class="close" onclick="closeOrder()">&times;</span>
-                <p class="order-text">Kérlek add meg az email címed a rendelés leadásához:</p>
-                <div class="email-container">
-                    <input type="email" name="email" id="email" placeholder="email@example.com" required>
-                    <button type="submit" id="confirmOrder" class="custom-btn">Rendelés Leadása</button>
+                <div class="name-container">
+                    <h2 class="name ">@Model.ItemName</h2>
+                </div>
+
+                <div class="description-container">
+                    <p class="description">@Model.ItemDescription</p>
+                </div>
+
+                <div class="size-selector">
+                    <p class="sizes">Méretek:</p>
+                    @foreach (var size in Model.ItemSize.Split(','))
+                    {
+                        <input type="radio" id="@size" name="selectedSize" value="@size" required />
+                        <label for="@size">@size</label>
+                    }
                 </div>
             </div>
-        </div>
-    </form>
+            
+            <div class="order">
+                <p class="price">@Model.ItemPrice Ft</p>
+                <p class="shipping">+ szállítási költség</p>
+                <button type="button" id="orderButton" class="design-btn">Megrendelés</button>
+            </div>
+
+            <!-- Modal for email input -->
+            <div id="emailModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeOrder()">&times;</span>
+                    <p class="order-text">Kérlek add meg az email címed a rendelés leadásához:</p>
+                    <div class="email-container">
+                        <input type="email" name="email" id="email" placeholder="email@example.com" required>
+                        <button type="submit" id="confirmOrder" class="custom-btn">Rendelés Leadása</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-
-
 
 
 

@@ -155,13 +155,14 @@ namespace Designer.Dnn.Designer.Controllers
                         <head>
                             <title>Rendelés Részletei</title>
                         </head>
-                        <body>
-                            <h2>Köszönjük megrendelésed!</h2>
-                            <p>A termék a legyártást követően postai utánvéttel átvehető.</p>
+                        <body style='font-size: 16px;'>
+                            <h2 style='font-size: 22px;'>Köszönjük megrendelésed!</h2>
+                            <p>A termék a legyártást követően üzletünkben átvehető.</p>
 
-                            <table style='width: 80%; border-collapse: collapse; background-color: #E4F0D0'>
+                            <table style='width: 80%; border-collapse: collapse; background-color: #E4F0D0; border-radius: 5px;'>
                                 <tr style='background-color: #C2D8B9; border: 1px solid #ddd; border-radius: 5px 5px 0 0;'>
-                                    <th colspan='2' style='border-bottom: 1px solid #ddd; padding: 8px;'>Részletek:</th>
+                                    <td style='border-bottom: 1px solid #ddd; padding: 8px; border-radius: 5px 0 0 0; font-weight: bold;'>Részletek:</th>
+                                    <td style='border-bottom: 1px solid #ddd; padding: 8px; border-radius: 0 5px 0 0;'> </td>
                                 </tr>
                                 <tr>
                                     <td style='padding: 8px;'>Termék neve:</td>
@@ -180,8 +181,8 @@ namespace Designer.Dnn.Designer.Controllers
                                     <td style='padding: 8px;'>{shippingCost} Ft</td>
                                 </tr>
                                 <tr style='background-color: #C2D8B9; border: 1px solid #ddd; border-radius: 0 0 5px 5px;'>
-                                    <td style='padding: 8px; font-weight: bold;'>Teljes ár:</td>
-                                    <td style='padding: 8px; font-weight: bold;'>{designedProduct.ItemPrice + shippingCost} Ft</td>
+                                    <td style='padding: 8px; font-weight: bold; border-radius: 0 0 0 5px;'>Teljes ár:</td>
+                                    <td style='padding: 8px; font-weight: bold; border-radius: 0 0 5px 0;'>{designedProduct.ItemPrice + shippingCost} Ft</td>
                                 </tr>
                             </table>
 
