@@ -16,6 +16,11 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Windows.Forms;
+using System.Net.Mail;
+using Hotcakes.Modules.Core.Admin.Configuration;
+using System.Drawing.Imaging;
+using System.Net;
+using Hotcakes.Modules.Core.Models;
 
 namespace Designer.Dnn.Designer.Controllers
 {
@@ -40,14 +45,13 @@ namespace Designer.Dnn.Designer.Controllers
         }
 
         [HttpPost]
-        public ActionResult Detail(HttpPostedFileBase graphicFile, int id)
+        public ActionResult Detail(HttpPostedFileBase graphicFile, int Id)
         {
-            DesignableProduct product;
             IDataContext ctx = DataContext.Instance();
 
             if (graphicFile != null && graphicFile.ContentLength > 0)
             {
-                var rep2 = ctx.GetRepository<UsableGraphics>();
+                var rep = ctx.GetRepository<UsableGraphics>();
 
                 var fileName = Path.GetFileName(graphicFile.FileName);
 
@@ -62,7 +66,7 @@ namespace Designer.Dnn.Designer.Controllers
 
                 try
                 {
-                    rep2.Insert(graphic);
+                    rep.Insert(graphic);
                     ctx.Commit();
                 }
                 catch (Exception ex)
@@ -71,10 +75,10 @@ namespace Designer.Dnn.Designer.Controllers
                 }
 
             }
-            
-            var rep = ctx.GetRepository<DesignableProduct>();
-            product = rep.GetById(id);
-            
+
+            var rep2 = ctx.GetRepository<DesignableProduct>();
+            var product = rep2.GetById(Id);
+
             return View(product);
 
         }
@@ -88,6 +92,19 @@ namespace Designer.Dnn.Designer.Controllers
             var images = rep.Get();
 
             return PartialView("GetUsableGraphics", images);
+        }
+
+        public string ConvertImageToBase64(string imagePath)
+        {
+            // Ensure the image file exists
+            if (!System.IO.File.Exists(imagePath))
+            {
+                throw new FileNotFoundException("Image file not found.", imagePath);
+            }
+
+            byte[] imageBytes = System.IO.File.ReadAllBytes(imagePath);
+            string base64String = Convert.ToBase64String(imageBytes);
+            return base64String;
         }
 
         [HttpPost]
@@ -124,6 +141,77 @@ namespace Designer.Dnn.Designer.Controllers
                 catch (Exception ex)
                 {
                     ViewBag.ErrorMessage = ex.Message;
+                }
+
+                try
+                {
+                    var rep2 = ctx.GetRepository<DesignableProduct>();
+                    var designedProduct = rep2.GetById(id);
+
+                    var shippingCost = 1050;
+
+                    string body = $@"
+                        <html>
+                        <head>
+                            <title>Rendelés Részletei</title>
+                        </head>
+                        <body>
+                            <h2>Köszönjük megrendelésed!</h2>
+                            <p>A termék a legyártást követően postai utánvéttel átvehető.</p>
+
+                            <table style='width: 80%; border-collapse: collapse; background-color: #E4F0D0'>
+                                <tr style='background-color: #C2D8B9; border: 1px solid #ddd; border-radius: 5px 5px 0 0;'>
+                                    <th colspan='2' style='border-bottom: 1px solid #ddd; padding: 8px;'>Részletek:</th>
+                                </tr>
+                                <tr>
+                                    <td style='padding: 8px;'>Termék neve:</td>
+                                    <td style='padding: 8px;'>{designedProduct.ItemName}</td>
+                                </tr>
+                                <tr>
+                                    <td style='padding: 8px;'>Termék mérete:</td>
+                                    <td style='padding: 8px;'>{selectedSize}</td>
+                                </tr>
+                                <tr>
+                                    <td style='padding: 8px;'>Termék ára:</td>
+                                    <td style='padding: 8px;'>{designedProduct.ItemPrice} Ft</td>
+                                </tr>
+                                <tr>
+                                    <td style='padding: 8px;'>Szállítási költség:</td>
+                                    <td style='padding: 8px;'>{shippingCost} Ft</td>
+                                </tr>
+                                <tr style='background-color: #C2D8B9; border: 1px solid #ddd; border-radius: 0 0 5px 5px;'>
+                                    <td style='padding: 8px; font-weight: bold;'>Teljes ár:</td>
+                                    <td style='padding: 8px; font-weight: bold;'>{designedProduct.ItemPrice + shippingCost} Ft</td>
+                                </tr>
+                            </table>
+
+                            <p>Rendelésed az alábbi email címen 24 órán belül visszamondható: shirtcraftbce@gmail.com</p>
+                        </body>
+                        </html>";
+
+
+                    MailAddress from = new MailAddress("shirtcraftbce@gmail.com");
+                    MailAddress to = new MailAddress(email);
+                    MailMessage mail = new MailMessage(from, to);
+                    mail.Subject = "Order Confirmation";
+                    mail.IsBodyHtml = true;
+                    mail.Body = body;
+                    Attachment attachment = new Attachment(filePath);
+                    mail.Attachments.Add(attachment);
+
+
+                    SmtpClient smtp = new SmtpClient();
+                    smtp.Host = "smtp.gmail.com"; // Or read from web.config
+                    smtp.Port = 587;                // Or read from web.config
+                    smtp.EnableSsl = true;          // Or read from web.config
+                    smtp.Credentials = new System.Net.NetworkCredential("shirtcraftbce@gmail.com", "ycwz djdr wxho gsxr"); // Or read from web.config
+
+                    smtp.Send(mail);
+                }
+                catch (Exception ex)
+                {
+                    // Handle exceptions
+                    ViewBag.Message = "Could not send email: " + ex.Message;
                 }
             }
 
