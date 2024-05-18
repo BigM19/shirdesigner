@@ -10,6 +10,12 @@
     ViewBag.Title = "Index";
     Layout = "~/desktopmodules/mvc/designer/Views/Shared/_Layout.cshtml";
 }
+<div class="search-container">
+    <form method="get" action="@Url.Action("Index")">
+        <input type="text" name="search" placeholder="Termék neve" class="search-input" value="@Request.QueryString["search"]" />
+        <button type="submit" class="custom-btn design-btn search">Keresés</button>
+    </form>
+</div>
 
 <div class="product-grid">
     @foreach (var item in Model)

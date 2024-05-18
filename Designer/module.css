@@ -11,6 +11,22 @@
 
 /* Index view*/
 
+.search-container {
+    margin: 1em auto;
+    width: 80%;
+}
+
+.search-input {
+    padding: 8px;
+    width: 84%;
+    border-radius: 5px
+}
+
+.search {
+    width: 14%;
+    padding: 10px;
+}
+
 .product-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3 items per row */
@@ -250,7 +266,7 @@
 }
 
 .canvas-buttons-container button {
-    width: 140px;
+    width: 160px;
     height: 60px;
 }
 

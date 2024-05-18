@@ -21,16 +21,21 @@ using Hotcakes.Modules.Core.Admin.Configuration;
 using System.Drawing.Imaging;
 using System.Net;
 using Hotcakes.Modules.Core.Models;
+using Hotcakes.Commerce.Orders;
+using Hotcakes.Commerce.Urls;
+using Hotcakes.Commerce;
+using Hotcakes.Commerce.Extensions;
+
 
 namespace Designer.Dnn.Designer.Controllers
 {
     public class DesignableProductController : DnnController
     {
-        public ActionResult Index()
+        public ActionResult Index(string search = "")
         {
             IDataContext ctx = DataContext.Instance();
             var rep = ctx.GetRepository<DesignableProduct>();
-            var products = rep.Get();
+            var products = rep.Get().Where(p => p.ItemName.ToLower().Contains(search.ToLower()));
             return View(products);
         }
 
@@ -218,6 +223,31 @@ namespace Designer.Dnn.Designer.Controllers
 
             return RedirectToAction("Index", "DesignableProduct");
         }
+
+        //public void AddProductToCart(object sender, EventArgs e)
+        //{
+
+        //    // create a reference to the Hotcakes store
+        //    var HccApp = HccAppHelper.InitHccApp();
+        //    // get an instance of the product to add
+        //    var p = HccApp.CatalogServices.Products.FindBySku("YOUR-SKU-TO-LOOK-UP");
+
+        //    // set the quantity
+        //    int qty = 1;
+
+        //    // create a reference to the current shopping cart
+        //    Order currentCart = HccApp.OrderServices.EnsureShoppingCart();
+
+        //    // create a line item for the cart using the product
+        //    LineItem li = HccApp.CatalogServices.ConvertProductToLineItem(p, new OptionSelections(), qty, HccApp);
+
+        //    // add the line item to the current cart
+        //    HccApp.AddToOrderWithCalculateAndSave(currentCart, li);
+
+        //    // send the customer to the shopping cart page
+        //    Response.Redirect(HccUrlBuilder.RouteHccUrl(HccRoute.Cart));
+
+        //}
 
     }
 }
