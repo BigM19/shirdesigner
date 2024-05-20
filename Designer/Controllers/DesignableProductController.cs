@@ -25,7 +25,11 @@ using Hotcakes.Commerce.Orders;
 using Hotcakes.Commerce.Urls;
 using Hotcakes.Commerce;
 using Hotcakes.Commerce.Extensions;
-
+using Hotcakes.CommerceDTO.v1.Catalog;
+using Hotcakes.CommerceDTO.v1;
+using Hotcakes.CommerceDTO.v1.Client;
+using Hotcakes.CommerceDTO.v1.Orders;
+using Hotcakes.CommerceDTO.v1.Shipping;
 
 namespace Designer.Dnn.Designer.Controllers
 {
@@ -99,21 +103,8 @@ namespace Designer.Dnn.Designer.Controllers
             return PartialView("GetUsableGraphics", images);
         }
 
-        public string ConvertImageToBase64(string imagePath)
-        {
-            // Ensure the image file exists
-            if (!System.IO.File.Exists(imagePath))
-            {
-                throw new FileNotFoundException("Image file not found.", imagePath);
-            }
-
-            byte[] imageBytes = System.IO.File.ReadAllBytes(imagePath);
-            string base64String = Convert.ToBase64String(imageBytes);
-            return base64String;
-        }
-
         [HttpPost]
-        public ActionResult CreateOrder(int id, string imageData, string email, string selectedSize )
+        public ActionResult CreateOrder(int id, string imageData, string email, string selectedSize)
         {
             IDataContext ctx = DataContext.Instance();
             var rep = ctx.GetRepository<ProductOrder>();
@@ -213,6 +204,7 @@ namespace Designer.Dnn.Designer.Controllers
                     smtp.Credentials = new System.Net.NetworkCredential("shirtcraftbce@gmail.com", "ycwz djdr wxho gsxr"); // Or read from web.config
 
                     smtp.Send(mail);
+
                 }
                 catch (Exception ex)
                 {
@@ -223,31 +215,6 @@ namespace Designer.Dnn.Designer.Controllers
 
             return RedirectToAction("Index", "DesignableProduct");
         }
-
-        //public void AddProductToCart(object sender, EventArgs e)
-        //{
-
-        //    // create a reference to the Hotcakes store
-        //    var HccApp = HccAppHelper.InitHccApp();
-        //    // get an instance of the product to add
-        //    var p = HccApp.CatalogServices.Products.FindBySku("YOUR-SKU-TO-LOOK-UP");
-
-        //    // set the quantity
-        //    int qty = 1;
-
-        //    // create a reference to the current shopping cart
-        //    Order currentCart = HccApp.OrderServices.EnsureShoppingCart();
-
-        //    // create a line item for the cart using the product
-        //    LineItem li = HccApp.CatalogServices.ConvertProductToLineItem(p, new OptionSelections(), qty, HccApp);
-
-        //    // add the line item to the current cart
-        //    HccApp.AddToOrderWithCalculateAndSave(currentCart, li);
-
-        //    // send the customer to the shopping cart page
-        //    Response.Redirect(HccUrlBuilder.RouteHccUrl(HccRoute.Cart));
-
-        //}
 
     }
 }
